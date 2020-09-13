@@ -1,0 +1,44 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "plugin:jest/recommended", "plugin:prettier/recommended"],
+  "plugins": ["jest", "prettier"],
+  "env": {
+    "es6": true,
+    "commonjs": true,
+    "node": true,
+    "jest": true,
+    "browser": true
+  },
+  "settings": {"import/resolver": {"node": {"paths": ["src"]}}},
+  "rules": {
+    "max-len": ["error", {"code": 180}],
+    "no-restricted-imports": [
+      "error",
+      {"patterns": ["../*"]}
+    ],
+    "comma-dangle": [2, "never"],
+    "react/jsx-filename-extension": [
+      2, {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "react/destructuring-assignment": [0],
+    "react/jsx-closing-tag-location": [0],
+    "object-curly-newline": [0],
+
+    "no-else-return": ["error", {"allowElseIf": true}],
+    "react/jsx-indent": [0],
+    "newline-per-chained-call": ["error", {"ignoreChainWithDepth": 6}],
+    "react/jsx-tag-spacing": [
+      2, {
+        "closingSlash": "never",
+        "beforeSelfClosing": "allow",
+        "afterOpening": "never"
+      }
+    ],
+    "react/forbid-prop-types": [0, {"forbid": ["<any>"]}],
+    "no-restricted-globals": [0],
+    "react/jsx-wrap-multilines": [0],
+    "react/jsx-one-expression-per-line": [0]
+  }
+}
