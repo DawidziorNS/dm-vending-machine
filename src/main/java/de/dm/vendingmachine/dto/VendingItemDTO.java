@@ -6,9 +6,10 @@ import lombok.Getter;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+
 @Builder
 @Getter
-public class InventoryFillingDTO {
+public class VendingItemDTO {
     @NotNull
     private Long productId;
 

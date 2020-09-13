@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -49,11 +48,13 @@ public class InventoryService {
                 .collect(Collectors.toList());
     }
 
-    public ReceiptDTO vending(List<VendingDTO> vendingList) {
+    public ReceiptDTO vending(VendingDTO vendingDTO) {
         List<ReceiptItemDTO> boughtItems = new LinkedList<>();
 
-        List<Long> productIds = vendingList.stream()
-                .map(VendingDTO::getProductId)
+        List<VendingItemDTO> vendingItems = vendingDTO.getVendingItems();
+
+        List<Long> productIds = vendingItems.stream()
+                .map(VendingItemDTO::getProductId)
                 .collect(Collectors.toList());
 
         List<Inventory> inventories = inventoryRepository.getInventoryByProductIds(productIds);
@@ -61,8 +62,8 @@ public class InventoryService {
         Map<Long, Long> productIdsByAmountFromInventory = inventories.stream()
                 .collect(Collectors.toMap(x -> x.getProduct().getId(), Inventory::getAmount));
 
-        Map<Long, Long> productIdsByAmountFromVendingList = vendingList.stream()
-                .collect(Collectors.toMap(VendingDTO::getProductId, VendingDTO::getAmount));
+        Map<Long, Long> productIdsByAmountFromVendingList = vendingItems.stream()
+                .collect(Collectors.toMap(VendingItemDTO::getProductId, VendingItemDTO::getAmount));
 
         productIdsByAmountFromVendingList.forEach((key, value) -> {
             long productId = key;
