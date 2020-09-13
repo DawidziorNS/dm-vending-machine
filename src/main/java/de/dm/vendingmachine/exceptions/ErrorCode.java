@@ -8,8 +8,7 @@ import lombok.Getter;
 public enum ErrorCode {
 
     OUT_OF_STOCK("Products out of stock"),
-    PRODUCT_NOT_FOUND("Product not found"),
-    PRODUCT_NOT_FOUND_IN_INVENTORY("Product not found in inventory");
+    PRODUCT_NOT_FOUND("Product not found");
 
     private String message;
 }

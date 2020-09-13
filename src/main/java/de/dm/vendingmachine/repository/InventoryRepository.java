@@ -2,8 +2,7 @@ package de.dm.vendingmachine.repository;
 
 import de.dm.vendingmachine.entity.Inventory;
 import de.dm.vendingmachine.entity.Product;
-import de.dm.vendingmachine.exceptions.CoreException;
-import de.dm.vendingmachine.exceptions.ErrorCode;
+import de.dm.vendingmachine.exceptions.ProductNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class InventoryRepository {
             return inventoryOpt.get();
         }
 
-        throw new CoreException(ErrorCode.PRODUCT_NOT_FOUND_IN_INVENTORY);
+        throw new ProductNotFoundException();
 
     }
 

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class FillInventoryDTO {
+public class InventoryFillingDTO {
     private Long productId;
     private Long amount;
 }

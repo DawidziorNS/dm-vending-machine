@@ -4,6 +4,7 @@ import de.dm.vendingmachine.entity.Product;
 import de.dm.vendingmachine.enums.ProductGroup;
 import de.dm.vendingmachine.exceptions.CoreException;
 import de.dm.vendingmachine.exceptions.ErrorCode;
+import de.dm.vendingmachine.exceptions.ProductNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -85,7 +86,7 @@ public class ProductRepository {
             return product.get();
         }
 
-        throw new CoreException(ErrorCode.PRODUCT_NOT_FOUND);
+        throw new ProductNotFoundException();
     }
 
 }

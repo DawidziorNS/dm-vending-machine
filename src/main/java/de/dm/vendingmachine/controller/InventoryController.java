@@ -1,6 +1,6 @@
 package de.dm.vendingmachine.controller;
 
-import de.dm.vendingmachine.dto.FillInventoryDTO;
+import de.dm.vendingmachine.dto.InventoryFillingDTO;
 import de.dm.vendingmachine.dto.InventoryDTO;
 import de.dm.vendingmachine.dto.ReceiptDTO;
 import de.dm.vendingmachine.dto.VendingDTO;
@@ -21,7 +21,7 @@ public class InventoryController {
 
     @GetMapping(path = "/all")
     public ResponseEntity<List<InventoryDTO>> getInventory() {
-        return ResponseEntity.ok(inventoryService.getInventory());
+        return ResponseEntity.ok(inventoryService.getInventories());
     }
 
     @GetMapping(path = "/product/{productId}")
@@ -30,8 +30,8 @@ public class InventoryController {
     }
 
     @PutMapping(path = "/fill")
-    public ResponseEntity<List<InventoryDTO>> fillInventory(@RequestBody FillInventoryDTO fillInventoryDTO) {
-        return ResponseEntity.ok(inventoryService.fillInventory(fillInventoryDTO));
+    public ResponseEntity<List<InventoryDTO>> fillInventory(@RequestBody InventoryFillingDTO inventoryFillingDTO) {
+        return ResponseEntity.ok(inventoryService.fillInventory(inventoryFillingDTO));
     }
 
     @PutMapping(path = "/vending")
