@@ -2,8 +2,6 @@ package de.dm.vendingmachine.repository;
 
 import de.dm.vendingmachine.entity.Product;
 import de.dm.vendingmachine.enums.ProductGroup;
-import de.dm.vendingmachine.exceptions.CoreException;
-import de.dm.vendingmachine.exceptions.ErrorCode;
 import de.dm.vendingmachine.exceptions.ProductNotFoundException;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +14,7 @@ import java.util.stream.Collectors;
 @Repository
 public class ProductRepository {
 
-    static List<Product> products = Arrays.asList(
+    static final List<Product> PRODUCTS = Arrays.asList(
             Product.builder()
                     .id(1)
                     .name("Balea shower gel")
@@ -68,25 +66,19 @@ public class ProductRepository {
     );
 
     public List<Product> getAllProducts() {
-        return products;
+        return PRODUCTS;
     }
 
     public List<Product> getProductsByProductGroup(ProductGroup productGroup) {
-        return products.stream()
+        return PRODUCTS.stream()
                 .filter(x -> productGroup.equals(x.getProductGroup()))
                 .collect(Collectors.toList());
     }
 
-    public Product getProductById(long productId) {
-        Optional<Product> product = products.stream()
+    public Optional<Product> getProductById(long productId) {
+        return PRODUCTS.stream()
                 .filter(x -> productId == x.getId())
                 .findFirst();
-
-        if(product.isPresent()) {
-            return product.get();
-        }
-
-        throw new ProductNotFoundException();
     }
 
 }

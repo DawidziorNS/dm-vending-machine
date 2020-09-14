@@ -108,4 +108,5 @@ public class InventoryService {
                 .total(total)
                 .build();
     }
+
 }

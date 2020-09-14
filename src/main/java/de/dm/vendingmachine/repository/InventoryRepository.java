@@ -48,7 +48,7 @@ public class InventoryRepository {
     }
 
     private List<Inventory> prepareInventory() {
-        List<Product> allProducts = ProductRepository.products;
+        List<Product> allProducts = ProductRepository.PRODUCTS;
         return allProducts.stream()
                 .map(product -> Inventory.builder()
                         .amount(10)

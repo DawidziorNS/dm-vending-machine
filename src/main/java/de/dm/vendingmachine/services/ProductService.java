@@ -3,6 +3,7 @@ package de.dm.vendingmachine.services;
 import de.dm.vendingmachine.entity.Product;
 import de.dm.vendingmachine.dto.ProductDTO;
 import de.dm.vendingmachine.enums.ProductGroup;
+import de.dm.vendingmachine.exceptions.ProductNotFoundException;
 import de.dm.vendingmachine.mappers.ProductMapper;
 import de.dm.vendingmachine.repository.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,9 +29,12 @@ public class ProductService {
     }
 
     public ProductDTO getProductById(long productId) {
-        Product productById = productRepository.getProductById(productId);
-        return productMapper.mapToProductDTO(productById);
+        Optional<Product> productById = productRepository.getProductById(productId);
+        if(productById.isPresent()) {
+            return productMapper.mapToProductDTO(productById.get());
+        }
 
+        throw new ProductNotFoundException();
     }
 
     public List<ProductDTO> getProductByProductGroup(ProductGroup productGroup) {
